@@ -1,0 +1,19 @@
+{
+  "name": "whales-names",
+  "version": "1.0.0",
+  "description": "update hosts file (/etc/hosts) with docker container names and watch for changes",
+  "main": "index.js",
+  "scripts": {
+    "lint": "eslint src/**/*.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "run": "node lib/index.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "dockerode": "^2.5.2"
+  },
+  "devDependencies": {
+    "eslint": "^4.8.0"
+  }
+}
