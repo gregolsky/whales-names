@@ -16,14 +16,13 @@
     "hosts",
     "dns"
   ],
+  "preferGlobal": true,
   "bin": {
-    "whales-names": "bin/whales-names.js"
+    "whales-names": "bin/whales-names"
   },
   "scripts": {
-    "lint": "eslint src/**/*.js",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "run": "node bin/sync-docker-hosts.js",
-    "nodemon": "nodemon bin/sync-docker-hosts.js"
+    "lint": "eslint lib/**/*.js",
+    "nodemon": "nodemon lib/index.js"
   },
   "repository": {
     "type": "git",
@@ -32,6 +31,9 @@
   "bugs": {
     "email": "gregory.lachowski+whalesnames@gmail.com",
     "url": "https://github.com/gregolsky/whales-names/issues"
+  },
+  "engines": {
+    "node": ">=8.0.0"
   },
   "author": "Grzegorz Lachowski",
   "license": "MIT",
