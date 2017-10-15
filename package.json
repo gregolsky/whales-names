@@ -7,6 +7,15 @@
     "lib/",
     "bin/"
   ],
+  "keywords": [
+    "docker",
+    "containers",
+    "hostname",
+    "host",
+    "hostnames",
+    "hosts",
+    "dns"
+  ],
   "bin": {
     "whales-names": "bin/whales-names.js"
   },
