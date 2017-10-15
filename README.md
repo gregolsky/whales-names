@@ -31,9 +31,12 @@ You can end it with simple Ctrl+C. Errors, if any are going to be printed on the
 ## Elevated privileges
 Due to file permissions of `/etc/hosts` file you need to use elevated privileges (run as Administrator, if you will) for running it.
 
-> Rae: You like whales?
-> Jesse: I like him.
-> Rae: Well, he doesn't like anybody, so stay away from him. You see, Willy's a case. A very special case.
-> Jesse: So? Who isn't?
+> **Rae**: You like whales?
+>
+> **Jesse**: I like him.
+>
+> **Rae**: Well, he doesn't like anybody, so stay away from him. You see, Willy's a case. A very special case.
+>
+> **Jesse**: So? Who isn't?
 >
 > Free Willy (1993)
