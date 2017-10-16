@@ -39,7 +39,8 @@
   "author": "Grzegorz Lachowski",
   "license": "MIT",
   "dependencies": {
-    "dockerode": "^2.5.2"
+    "dockerode": "^2.5.2",
+    "util.promisify": "^1.0.0"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",

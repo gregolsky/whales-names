@@ -1,3 +1,8 @@
+const nodeVersion = parseInt((/v([0-9]+)./.exec(process.version))[1]);
+if (nodeVersion < 8) {
+    require('util.promisify/shim')();
+}
+
 const docker = require('./docker');
 const HostNamesFileOperator = require('./hosts');
 const DockerContainerHostNamesSynchronizer = require('./sync');
