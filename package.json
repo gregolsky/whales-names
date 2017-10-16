@@ -22,7 +22,8 @@
   },
   "scripts": {
     "lint": "eslint lib/**/*.js",
-    "nodemon": "nodemon lib/index.js"
+    "nodemon": "nodemon lib/index.js",
+    "build": "babel src --out-dir lib"
   },
   "repository": {
     "type": "git",
@@ -33,7 +34,7 @@
     "url": "https://github.com/gregolsky/whales-names/issues"
   },
   "engines": {
-    "node": ">=8.0.0"
+    "node": ">=6.0.0"
   },
   "author": "Grzegorz Lachowski",
   "license": "MIT",
@@ -41,6 +42,8 @@
     "dockerode": "^2.5.2"
   },
   "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.6.0",
     "eslint": "^4.8.0",
     "nodemon": "^1.12.1"
   }
