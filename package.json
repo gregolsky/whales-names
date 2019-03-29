@@ -2,9 +2,9 @@
   "name": "whales-names",
   "version": "0.1.4",
   "description": "Simplistic solution of `why can't I reach my docker containers by name?'. Update hosts file (/etc/hosts) with docker container names and watch for changes",
-  "main": "index.js",
+  "main": "src/index.js",
   "files": [
-    "lib/",
+    "src/",
     "bin/"
   ],
   "keywords": [
@@ -21,9 +21,8 @@
     "whales-names": "bin/whales-names"
   },
   "scripts": {
-    "lint": "eslint lib/**/*.js",
-    "nodemon": "nodemon lib/index.js",
-    "build": "babel src --out-dir lib"
+    "lint": "eslint src",
+    "nodemon": "nodemon index.js"
   },
   "repository": {
     "type": "git",
@@ -34,7 +33,7 @@
     "url": "https://github.com/gregolsky/whales-names/issues"
   },
   "engines": {
-    "node": ">=6.0.0"
+    "node": ">=8.0.0"
   },
   "author": "Grzegorz Lachowski",
   "license": "MIT",
@@ -43,9 +42,7 @@
     "util.promisify": "^1.0.0"
   },
   "devDependencies": {
-    "babel-cli": "^6.26.0",
-    "babel-preset-env": "^1.7.0",
-    "eslint": "^4.8.0",
+    "eslint": "^5.15.3",
     "nodemon": "^1.18.10"
   }
 }

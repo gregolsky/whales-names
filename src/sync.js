@@ -17,7 +17,7 @@ class DockerContainerHostNamesSynchronizer {
         const containerEntries = await this._docker.listContainersAsync();
 
         const containersPromises = containerEntries.map(async c => {
-            const container = docker.getContainer(c.Id)
+            const container = docker.getContainer(c.Id);
             container.inspectAsync = util.promisify(container.inspect);
             return await container.inspectAsync();
         });

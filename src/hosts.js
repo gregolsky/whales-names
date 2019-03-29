@@ -23,16 +23,16 @@ function formatHostsEntry(hostsEntry) {
     return `${hostsEntry.ip}\t${namesString}`;
 }
 
-const UPDATE_REGION_START = '# whales-names begin' + os.EOL
+const UPDATE_REGION_START = '# whales-names begin' + os.EOL;
 const UPDATE_REGION_END = '# whales-names end' + os.EOL;
 
 function getDefaultHostNamesFile() {
     if (os.type() === 'Linux') {
-        return "/etc/hosts";
+        return '/etc/hosts';
     } else if (os.type() === 'Windows_NT') {
-        return "C:\\Windows\\System32\\drivers\\etc\\hosts";
+        return 'C:\\Windows\\System32\\drivers\\etc\\hosts';
     } else {
-        throw new Error("Platform not supported.");
+        throw new Error('Platform not supported.');
     }
 }
 
@@ -58,7 +58,7 @@ class HostNamesFileOperator {
         if (DOCKER_HOSTS_SECTION_REGEX.test(hostsFileContent)) {
             hostsFileContent = hostsFileContent.replace(DOCKER_HOSTS_SECTION_REGEX, dockerHostsSection);
         } else {
-            hostsFileContent = `${hostsFileContent}${os.EOL}${dockerHostsSection}`
+            hostsFileContent = `${hostsFileContent}${os.EOL}${dockerHostsSection}`;
         }
 
         // TODO don't write if nothing changed

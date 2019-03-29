@@ -9,17 +9,19 @@ const DockerContainerHostNamesSynchronizer = require('./sync');
 
 (async function main() {
     const args = process.argv.slice(2);
-    console.log(`Synchronizing docker container hostnames in hosts file.`);
+    // eslint-disable-next-line no-console
+    console.log('Synchronizing docker container hostnames in hosts file.');
     await syncDockerHosts(args[0]);
 })();
 
 async function syncDockerHosts(hostsFile, checkInterval = 5000) {
     const hostNamesOperator = new HostNamesFileOperator(hostsFile); 
     const dockerNamesSynchronizer = new DockerContainerHostNamesSynchronizer(docker, hostNamesOperator);
-    const intervalId = setInterval(async () => {
+    setInterval(async () => {
         try {
             await dockerNamesSynchronizer.synchronize();
         } catch (err) {
+            // eslint-disable-next-line no-console
             console.error(err);
         }
     }, checkInterval);
