@@ -7,8 +7,8 @@ const docker = require('./docker');
 const HostNamesFileOperator = require('./hosts');
 const DockerContainerHostNamesSynchronizer = require('./sync');
 
-(async function main(...args) {
-    args = args.slice(2);
+(async function main() {
+    const args = process.argv.slice(2);
     console.log(`Synchronizing docker container hostnames in hosts file.`);
     await syncDockerHosts(args[0]);
 })();
