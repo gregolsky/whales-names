@@ -1,6 +1,6 @@
 {
   "name": "whales-names",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "Simplistic solution of `why can't I reach my docker containers by name?'. Update hosts file (/etc/hosts) with docker container names and watch for changes",
   "main": "src/index.js",
   "files": [
