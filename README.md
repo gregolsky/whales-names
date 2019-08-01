@@ -1,14 +1,16 @@
+# Whales' names 🐋
+
 Simplistic solution of *why can't I reach my docker containers by name?* problem. Continuously update hosts file (`/etc/hosts`) with docker container names and aliases and watch for changes.
 
 [![npm version](https://badge.fury.io/js/whales-names.svg)](https://badge.fury.io/js/whales-names)
 
-# Installation
+## Installation 🔨
 
 ```
 $ npm install -g whales-names
 ```
 
-# Usage
+## Usage 📘
 
 ```
 $ whales-names
@@ -30,7 +32,7 @@ Afterwards you are going to see a new section in the end of your `/etc/hosts` fi
 
 You can end it with simple Ctrl+C. Errors, if any are going to be printed on the console.
 
-## Elevated privileges
+### Elevated privileges ⚠️
 Due to file permissions of `/etc/hosts` file you need to use elevated privileges (run as Administrator, if you will) for running it.
 
 > **Rae**: You like whales?
@@ -41,4 +43,4 @@ Due to file permissions of `/etc/hosts` file you need to use elevated privileges
 >
 > **Jesse**: So? Who isn't?
 >
-> Free Willy (1993)
+> Free Willy (1993) 🐳
