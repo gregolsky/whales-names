@@ -2,7 +2,7 @@
 
 Simplistic solution of *why can't I reach my docker containers by name?* problem. Continuously update hosts file (`/etc/hosts`) with docker container names and aliases and watch for changes.
 
-[![npm version](https://badge.fury.io/js/whales-names.svg)](https://badge.fury.io/js/whales-names)
+[![npm version](https://badge.fury.io/js/whales-names.svg)](https://badge.fury.io/js/whales-names) [![Known Vulnerabilities](https://snyk.io/test/github/gregolsky/whales-names/badge.svg)](https://snyk.io/test/github/gregolsky/whales-names)
 
 ## Installation 🔨
 
