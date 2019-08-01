@@ -38,11 +38,11 @@
   "author": "Grzegorz Lachowski",
   "license": "MIT",
   "dependencies": {
-    "dockerode": "^2.5.2",
+    "dockerode": "^2.5.8",
     "util.promisify": "^1.0.0"
   },
   "devDependencies": {
-    "eslint": "^5.15.3",
-    "nodemon": "^1.18.10"
+    "eslint": "^5.16.0",
+    "nodemon": "^1.19.1"
   }
 }
