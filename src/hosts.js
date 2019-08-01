@@ -27,7 +27,7 @@ const UPDATE_REGION_START = '# whales-names begin' + os.EOL;
 const UPDATE_REGION_END = '# whales-names end' + os.EOL;
 
 function getDefaultHostNamesFile() {
-    if (os.type() === 'Linux') {
+    if (os.type() === 'Linux' || os.type() === 'Darwin') {
         return '/etc/hosts';
     } else if (os.type() === 'Windows_NT') {
         return 'C:\\Windows\\System32\\drivers\\etc\\hosts';
