@@ -23,8 +23,8 @@ function formatHostsEntry(hostsEntry) {
     return `${hostsEntry.ip}\t${namesString}`;
 }
 
-const UPDATE_REGION_START = '# whales-names begin' + os.EOL;
-const UPDATE_REGION_END = '# whales-names end' + os.EOL;
+const UPDATE_REGION_START = os.EOL + '# whales-names begin' + os.EOL;
+const UPDATE_REGION_END = '# whales-names end' + os.EOL + os.EOL;
 
 function getDefaultHostNamesFile() {
     if (os.type() === 'Linux' || os.type() === 'Darwin') {
@@ -36,7 +36,7 @@ function getDefaultHostNamesFile() {
     }
 }
 
-const DOCKER_HOSTS_SECTION_REGEX = /# whales-names begin([\s\S]*)# whales-names end/;
+const DOCKER_HOSTS_SECTION_REGEX = /([\s]){2}# whales-names begin([\s\S]*)# whales-names end([\s])+/;
 
 class HostNamesFileOperator {
 
