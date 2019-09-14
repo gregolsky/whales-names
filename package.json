@@ -22,7 +22,8 @@
   },
   "scripts": {
     "lint": "eslint src",
-    "nodemon": "nodemon index.js"
+    "nodemon": "nodemon index.js",
+    "test": "mocha"
   },
   "repository": {
     "type": "git",
@@ -43,6 +44,7 @@
   },
   "devDependencies": {
     "eslint": "^5.16.0",
+    "mocha": "^6.2.0",
     "nodemon": "^1.19.1"
   }
 }

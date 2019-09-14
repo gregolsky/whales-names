@@ -1,7 +1,8 @@
 {
     "env": {
         "node": true,
-        "es6": true
+        "es6": true,
+        "mocha": true
     },
     "parserOptions": {
         "ecmaVersion": 2017,
@@ -12,10 +13,6 @@
         "indent": [
             "error",
             4
-        ],
-        "linebreak-style": [
-            "error",
-            "windows"
         ],
         "quotes": [
             "error",

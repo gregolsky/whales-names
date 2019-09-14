@@ -24,7 +24,7 @@ function formatHostsEntry(hostsEntry) {
 }
 
 const UPDATE_REGION_START = '# whales-names begin' + os.EOL;
-const UPDATE_REGION_END = '# whales-names end' + os.EOL;
+const UPDATE_REGION_END = '# whales-names end';
 
 function getDefaultHostNamesFile() {
     if (os.type() === 'Linux' || os.type() === 'Darwin') {
@@ -50,19 +50,27 @@ class HostNamesFileOperator {
             throw new Error(`Hosts file ${this._hostsFile} does not exist.`);
         }
 
+        //TODO use fs streams or readline
+        let hostsFileContent = await fs.readFileAsync(this._hostsFile, 'utf8');
+
+
+        hostsFileContent = this.updateHostsFileContent(hostsFileContent, hostNameEntries);
+        
+        // TODO don't write if nothing changed
+        await fs.writeFileAsync(this._hostsFile, hostsFileContent, 'utf8');
+    }
+
+    async updateHostsFileContent(hostsFileContent, hostNameEntries) {
         const dockerHostsSectionContent = formatHostsEntries(hostNameEntries) + os.EOL;
         const dockerHostsSection = `${UPDATE_REGION_START}${dockerHostsSectionContent}${UPDATE_REGION_END}`;
 
-        //TODO use fs streams or readline
-        let hostsFileContent = await fs.readFileAsync(this._hostsFile, 'utf8');
         if (DOCKER_HOSTS_SECTION_REGEX.test(hostsFileContent)) {
             hostsFileContent = hostsFileContent.replace(DOCKER_HOSTS_SECTION_REGEX, dockerHostsSection);
         } else {
             hostsFileContent = `${hostsFileContent}${os.EOL}${dockerHostsSection}`;
         }
 
-        // TODO don't write if nothing changed
-        await fs.writeFileAsync(this._hostsFile, hostsFileContent, 'utf8');
+        return hostsFileContent;
     }
 }
 
