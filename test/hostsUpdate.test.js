@@ -28,7 +28,8 @@ describe('updates hosts files properly', function () {
 
 192.168.6.1 stuff
 172.120.8.1 private
-`;
+`.replace(/\n/g, os.EOL);
+
         describe('single update, with some docker hosts there', function () {
             const HOSTS = [
                 { ip: '1.2.3.4', names: ['greg'] },
@@ -76,7 +77,7 @@ describe('updates hosts files properly', function () {
 192.168.2.3 testmachine anothernameoftest
 
 192.168.6.1 stuff
-`;
+`.replace(/\n/g, os.EOL);
 
         const DOCKER_HOST_CASES = [
             [
