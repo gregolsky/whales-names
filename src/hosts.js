@@ -10,12 +10,13 @@ fs.readFileAsync = util.promisify(fs.readFile.bind(fs));
 fs.writeFileAsync = util.promisify(fs.writeFile.bind(fs));
 
 function formatHostsEntries(hostsEntries) {
-    return hostsEntries
+    const hostsSection = hostsEntries
         .filter(x => {
             return x.names && x.names.length && x.ip;
         })
         .map(formatHostsEntry)
         .join(os.EOL);
+    return os.EOL + hostsSection + os.EOL;
 }
 
 function formatHostsEntry(hostsEntry) {
@@ -23,7 +24,7 @@ function formatHostsEntry(hostsEntry) {
     return `${hostsEntry.ip}\t${namesString}`;
 }
 
-const UPDATE_REGION_START = '# whales-names begin' + os.EOL;
+const UPDATE_REGION_START = '# whales-names begin';
 const UPDATE_REGION_END = '# whales-names end';
 
 function getDefaultHostNamesFile() {
@@ -36,7 +37,7 @@ function getDefaultHostNamesFile() {
     }
 }
 
-const DOCKER_HOSTS_SECTION_REGEX = /# whales-names begin([\s\S]*)# whales-names end/;
+const DOCKER_HOSTS_SECTION_REGEX = /# whales-names begin\s([\s\S]*)# whales-names end/;
 
 class HostNamesFileOperator {
 
@@ -61,13 +62,20 @@ class HostNamesFileOperator {
     }
 
     async updateHostsFileContent(hostsFileContent, hostNameEntries) {
-        const dockerHostsSectionContent = formatHostsEntries(hostNameEntries) + os.EOL;
+        const dockerHostsSectionContent = hostNameEntries && hostNameEntries.length 
+            ? formatHostsEntries(hostNameEntries)
+            : os.EOL;
         const dockerHostsSection = `${UPDATE_REGION_START}${dockerHostsSectionContent}${UPDATE_REGION_END}`;
 
         if (DOCKER_HOSTS_SECTION_REGEX.test(hostsFileContent)) {
             hostsFileContent = hostsFileContent.replace(DOCKER_HOSTS_SECTION_REGEX, dockerHostsSection);
         } else {
-            hostsFileContent = `${hostsFileContent}${os.EOL}${dockerHostsSection}`;
+            const oldContentEndsWithEol = /[\r\n]/.test(hostsFileContent[hostsFileContent.length - 1]);
+            if (!oldContentEndsWithEol) {
+                hostsFileContent += os.EOL;
+            }
+
+            hostsFileContent += `${dockerHostsSection}${os.EOL}`;
         }
 
         return hostsFileContent;

@@ -78,47 +78,55 @@ describe('updates hosts files properly', function () {
 192.168.6.1 stuff
 `;
 
-        describe('single update, with some docker hosts there', function () {
-            const HOSTS = [
+        const DOCKER_HOST_CASES = [
+            [
                 { ip: '1.2.3.4', names: ['greg'] },
                 { ip: '1.2.3.5', names: ['mikkel', 'jonas'] },
                 { ip: '1.2.3.11', names: ['eleven'] }
-            ];
+            ],
+            [] // no docker hosts at all
+        ];
 
-            beforeEach(async function () {
-                await applyUpdate(SRC_FILE_CONTENT, HOSTS);
+        for (var hostsCase of DOCKER_HOST_CASES) {
+
+            describe(`single update, with ${hostsCase.length} docker hosts there`, function () {
+                const HOSTS = hostsCase;
+
+                beforeEach(async function () {
+                    await applyUpdate(SRC_FILE_CONTENT, HOSTS);
+                });
+
+                it('old hosts are there', function () {
+                    assert.strictEqual(0, resultFileContent.indexOf(SRC_FILE_CONTENT));
+                });
+
+                it('new hosts are there', function () {
+                    for (let host of HOSTS) {
+                        assert.notStrictEqual(-1, resultFileContent.indexOf(`${host.ip}\t${host.names.join(' ')}`), resultFileContent);
+                    }
+                });
+
+                it('marker is there', function () {
+                    assert.notStrictEqual(-1, resultFileContent.indexOf('whales-names begin'));
+                    assert.notStrictEqual(-1, resultFileContent.indexOf('whales-names end'));
+                });
+
+                it('lines count is new + markers + old', function () {
+                    const oldLineCount = SRC_FILE_CONTENT.split(os.EOL).length;
+                    const newLineCount = resultFileContent.split(os.EOL).length;
+                    assert.strictEqual(oldLineCount + 2 + HOSTS.length, newLineCount, resultFileContent);
+                });
+
+                it('multiple updates and lines count is still new + markers + old', async function () {
+                    for (let i = 0; i < 30; i++) {
+                        await applyUpdate(resultFileContent, HOSTS);
+                    }
+
+                    const oldLineCount = SRC_FILE_CONTENT.split(os.EOL).length;
+                    const newLineCount = resultFileContent.split(os.EOL).length;
+                    assert.strictEqual(oldLineCount + 2 + HOSTS.length, newLineCount, resultFileContent);
+                });
             });
-
-            it('old hosts are there', function () {
-                assert.strictEqual(0, resultFileContent.indexOf(SRC_FILE_CONTENT));
-            });
-
-            it('new hosts are there', function () {
-                for (let host of HOSTS) {
-                    assert.notStrictEqual(-1, resultFileContent.indexOf(`${host.ip}\t${host.names.join(' ')}`), resultFileContent);
-                }
-            });
-
-            it('marker is there', function () {
-                assert.notStrictEqual(-1, resultFileContent.indexOf('whales-names begin'));
-                assert.notStrictEqual(-1, resultFileContent.indexOf('whales-names end'));
-            });
-
-            it('lines count is new + markers + old', function () {
-                const oldLineCount = SRC_FILE_CONTENT.split(os.EOL).length;
-                const newLineCount = resultFileContent.split(os.EOL).length;
-                assert.strictEqual(oldLineCount + 2 + HOSTS.length, newLineCount, resultFileContent);
-            });
-
-            it('multiple updates and lines count is still new + markers + old', async function () {
-                for (let i = 0; i < 30; i++) {
-                    await applyUpdate(resultFileContent, HOSTS);
-                }
-
-                const oldLineCount = SRC_FILE_CONTENT.split(os.EOL).length;
-                const newLineCount = resultFileContent.split(os.EOL).length;
-                assert.strictEqual(oldLineCount + 2 + HOSTS.length, newLineCount, resultFileContent);
-            });
-        });
+        }
     });
 });
