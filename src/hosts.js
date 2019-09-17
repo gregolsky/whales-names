@@ -53,15 +53,12 @@ class HostNamesFileOperator {
 
         //TODO use fs streams or readline
         let hostsFileContent = await fs.readFileAsync(this._hostsFile, 'utf8');
-
-
         hostsFileContent = this.updateHostsFileContent(hostsFileContent, hostNameEntries);
-        
         // TODO don't write if nothing changed
         await fs.writeFileAsync(this._hostsFile, hostsFileContent, 'utf8');
     }
 
-    async updateHostsFileContent(hostsFileContent, hostNameEntries) {
+    updateHostsFileContent(hostsFileContent, hostNameEntries) {
         const dockerHostsSectionContent = hostNameEntries && hostNameEntries.length 
             ? formatHostsEntries(hostNameEntries)
             : os.EOL;
