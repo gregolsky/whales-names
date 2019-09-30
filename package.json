@@ -40,6 +40,7 @@
   "license": "MIT",
   "dependencies": {
     "dockerode": "^2.5.8",
+    "single-instance": "0.0.1",
     "util.promisify": "^1.0.0"
   },
   "devDependencies": {

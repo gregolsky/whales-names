@@ -6,12 +6,24 @@ if (nodeVersion < 8) {
 const docker = require('./docker');
 const HostNamesFileOperator = require('./hosts');
 const DockerContainerHostNamesSynchronizer = require('./sync');
+const SingleInstance = require('single-instance');
+
 
 (async function main() {
     const args = process.argv.slice(2);
-    // eslint-disable-next-line no-console
-    console.log('Synchronizing docker container hostnames in hosts file.');
-    await syncDockerHosts(args[0]);
+    var locker = new SingleInstance('whales-names');
+    
+    locker.lock()
+    .then(
+        async () => {
+      // eslint-disable-next-line no-console
+      console.log('Synchronizing docker container hostnames in hosts file.');
+      await syncDockerHosts(args[0]);
+    })
+    .catch((err) => {
+      console.log(err);
+      process.exit();
+    })
 })();
 
 async function syncDockerHosts(hostsFile, checkInterval = 5000) {
